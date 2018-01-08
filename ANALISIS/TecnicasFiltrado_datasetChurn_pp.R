@@ -74,15 +74,3 @@ write.csv(importanciadevariables_control,"D:/Byte/Machine Learning/Predictivo Po
 
 
 
-
-BCCA_TDP_DATA_PREPAGO_save <- BCCA_TDP_DATA_PREPAGO
-BCCA_TDP_DATA_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PREPAGO, "produc_c")
-library("FSelector")
-importanciaIG_prepago <- information.gain(target_c~.,BCCA_TDP_DATA_PREPAGO)
-
-
-
-BCCA_TDP_DATA_PREPAGO_save <- BCCA_TDP_DATA_PREPAGO
-BCCA_TDP_DATA_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PREPAGO, "produc_c")
-library("FSelector")
-importanciaIG_prepago <- information.gain(target_c~.,BCCA_TDP_DATA_PREPAGO)
