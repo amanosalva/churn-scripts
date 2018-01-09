@@ -892,7 +892,7 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                lista_output[[2]] <- trama_transformada
                
                
-               return(trama_transformada)
+               return(lista_output)
              },
              
              {
