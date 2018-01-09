@@ -6,7 +6,7 @@
 #Importación de data cruda.
 library(ByteAnalitycsUtils)
 library(readr)
-BCCA_TDP_DATA_RAW <- read_csv("D:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/Corrección final dataset/BCCA_TDP_DATA_RAW.csv", 
+BCCA_TDP_DATA_RAW <- read_csv("C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/RAW DATA - FINAL/BCCA_TDP_DATA_RAW.csv", 
                               col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
                                                "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
                                                "fld139_n"= col_double(), "fld141_n"= col_double(), 
@@ -38,7 +38,7 @@ BCCA_TDP_DATA_RAW <- eliminaCaracteristica(BCCA_TDP_DATA_RAW,caracteristicasInut
 
 #Características que serán eliminadas por valores faltantes y tienen poca relevancia en la generación de modelos.
 caracteristicasInutiles <- c("genero_c","ecivil_c","X1_1","X2","X3","gama_c","depart_c",
-                             "provi_c","disti_c", "tcsecn_c")
+                             "provi_c","disti_c", "tcsecn_c", "serietd_c","eqaseg_c")
 BCCA_TDP_DATA_RAW <- eliminaCaracteristica(BCCA_TDP_DATA_RAW,caracteristicasInutiles)
 rm(caracteristicasInutiles)
 
@@ -99,72 +99,59 @@ exportaValoresFaltantes(dataset = BCCA_TDP_DATA_RAW_CONTROL, path = "C:/Byte/Mac
 ################################################################################################################################################################################
 #Análisis de valores faltantes para cada producto respecto al target.
 
-#Prepago:
-
-#Edad
-length(BCCA_TDP_DATA_RAW_PREPAGO$edad_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$edad_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_PREPAGO$edad_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$edad_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "1"])
-
-#antig_n
-length(BCCA_TDP_DATA_RAW_PREPAGO$antig_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$antig_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_PREPAGO$antig_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$antig_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "1"])
-
-#numlin_n
-length(BCCA_TDP_DATA_RAW_PREPAGO$numlin_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$numlin_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_PREPAGO$numlin_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$numlin_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "1"])
-
-#eqanti_n
-length(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n[is.na(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n) & BCCA_TDP_DATA_RAW_PREPAGO$target_c == "1"])
-
-#Postpago:
-
-#Edad
-length(BCCA_TDP_DATA_RAW_POSTPAGO$edad_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$edad_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_POSTPAGO$edad_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$edad_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "1"])
-
-#antig_n
-length(BCCA_TDP_DATA_RAW_POSTPAGO$antig_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$antig_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_POSTPAGO$antig_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$antig_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "1"])
-
-#numlin_n
-length(BCCA_TDP_DATA_RAW_POSTPAGO$numlin_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$numlin_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_POSTPAGO$numlin_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$numlin_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "1"])
-
-#eqanti_n
-length(BCCA_TDP_DATA_RAW_POSTPAGO$eqanti_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$eqanti_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_POSTPAGO$eqanti_n[is.na(BCCA_TDP_DATA_RAW_POSTPAGO$eqanti_n) & BCCA_TDP_DATA_RAW_POSTPAGO$target_c == "1"])
-
-
-#Control:
-
-#Edad
-length(BCCA_TDP_DATA_RAW_CONTROL$edad_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$edad_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_CONTROL$edad_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$edad_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "1"])
-
-
-#antig_n
-length(BCCA_TDP_DATA_RAW_CONTROL$antig_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$antig_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_CONTROL$antig_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$antig_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "1"])
-
-#numlin_n
-length(BCCA_TDP_DATA_RAW_CONTROL$numlin_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$numlin_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_CONTROL$numlin_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$numlin_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "1"])
-
-#eqanti_n
-length(BCCA_TDP_DATA_RAW_CONTROL$eqanti_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$eqanti_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "0"])
-length(BCCA_TDP_DATA_RAW_CONTROL$eqanti_n[is.na(BCCA_TDP_DATA_RAW_CONTROL$eqanti_n) & BCCA_TDP_DATA_RAW_CONTROL$target_c == "1"])
-
-#Conclusiones del análisis:
-## La relación de valores faltantes para no portados y valores faltantes para portados que posee cada producto es casi de 1 a 2  ()
-## La variable numlin_n no aportará al modelo ya que la mayoría de los valores faltantes son para los faltantes.
-#(Esto debe ir documentado en alguna parte); por lo tanto esa variable será eliminada de los tres productos.
-
 ####################################################################################################################################
 
 BCCA_TDP_DATA_RAW_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_PREPAGO, c("numlin_n"))
 BCCA_TDP_DATA_RAW_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_POSTPAGO, c("numlin_n"))
 BCCA_TDP_DATA_RAW_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_CONTROL, c("numlin_n"))
+
+
+
+#No corresponde al negocio prepago
+BCCA_TDP_DATA_RAW_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_PREPAGO, c("linper_c","costpl_n","conren_c",
+                                                                                  "cnttoc_n","cntnrc_n","cnttmc_n",
+                                                                                  "cntctd_n","cntctl_n","cntctl_1_n",
+                                                                                  "cntctl_2_n","fld115_n","fld116_n",
+                                                                                  "fld117_n","fld119_c","fld120_c",
+                                                                                  "fld121_c","fld122_c","fld138_n",
+                                                                                  "fld139_n","fld140_n","fld141_n",
+                                                                                  "fld142_n","fld143_n","fld144_n",
+                                                                                  "fld145_n","fld146_n"))
+
+
+
+#No corresponde al negocio postpago
+BCCA_TDP_DATA_RAW_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_POSTPAGO ,c("pli_sn_c","cant1m_n","mont1m_n",
+                                                                                   "cant3m_n","mont3m_n","cant6m_n",
+                                                                                   "mont6m_n","ctotal_n","mtotal_n")) 
+
+
+#No corresponde al negocio control
+BCCA_TDP_DATA_RAW_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_CONTROL,c("pli_sn_c","cant1m_n","mont1m_n",
+                                                                                 "cant3m_n","mont3m_n","cant6m_n",
+                                                                                 "mont6m_n","ctotal_n","mtotal_n")) 
+
+
+
+
+
+
+#Problema en tráfico por depuración
+BCCA_TDP_DATA_RAW_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_PREPAGO, c("fld055_n","fld056_n","fld059_n",
+                                                                                  "fld060_n","fld063_n","fld064_n",
+                                                                                  "fld067_n","fld068_n","fld071_n",
+                                                                                  "fld072_n"))
+
+BCCA_TDP_DATA_RAW_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_POSTPAGO, c("fld055_n","fld056_n","fld059_n",
+                                                                                    "fld060_n","fld063_n","fld064_n",
+                                                                                    "fld067_n","fld068_n","fld071_n",
+                                                                                    "fld072_n"))
+
+BCCA_TDP_DATA_RAW_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_RAW_CONTROL, c("fld055_n","fld056_n","fld059_n",
+                                                                                  "fld060_n","fld063_n","fld064_n",
+                                                                                  "fld067_n","fld068_n","fld071_n",
+                                                                                  "fld072_n"))
+
 
 #Verificando balanceo
 barplot(table(BCCA_TDP_DATA_RAW_PREPAGO$target_c))
@@ -185,17 +172,14 @@ barplot(table(BCCA_TDP_DATA_RAW_CONTROL$target_c))
 
 BCCA_TDP_DATA_PURE_PREPAGO<- subset(BCCA_TDP_DATA_RAW_PREPAGO, !is.na(BCCA_TDP_DATA_RAW_PREPAGO$edad_n) &
                               !is.na(BCCA_TDP_DATA_RAW_PREPAGO$antig_n) &
-                              !is.na(BCCA_TDP_DATA_RAW_PREPAGO$eqaseg_c) &
-                              !is.na(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n) & !is.na(BCCA_TDP_DATA_RAW_PREPAGO$costpl_n))
+                              !is.na(BCCA_TDP_DATA_RAW_PREPAGO$eqanti_n))
 
 BCCA_TDP_DATA_PURE_POSTPAGO<- subset(BCCA_TDP_DATA_RAW_POSTPAGO, !is.na(BCCA_TDP_DATA_RAW_POSTPAGO$edad_n) &
                               !is.na(BCCA_TDP_DATA_RAW_POSTPAGO$antig_n) &
-                              !is.na(BCCA_TDP_DATA_RAW_POSTPAGO$eqaseg_c) &
                               !is.na(BCCA_TDP_DATA_RAW_POSTPAGO$eqanti_n) & !is.na(BCCA_TDP_DATA_RAW_POSTPAGO$costpl_n))
 
 BCCA_TDP_DATA_PURE_CONTROL<- subset(BCCA_TDP_DATA_RAW_CONTROL, !is.na(BCCA_TDP_DATA_RAW_CONTROL$edad_n) &
                               !is.na(BCCA_TDP_DATA_RAW_CONTROL$antig_n)&
-                              !is.na(BCCA_TDP_DATA_RAW_CONTROL$eqaseg_c) &
                               !is.na(BCCA_TDP_DATA_RAW_CONTROL$eqanti_n) & !is.na(BCCA_TDP_DATA_RAW_CONTROL$costpl_n))
 
 #Verificación
@@ -208,32 +192,14 @@ sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$cant6m_n))
 sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$mont6m_n))
 sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$ctotal_n))
 sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$mtotal_n))
-sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$costpl_n))
-sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$cnttoc_n))
-sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$cntnrc_n))
-sum(is.na(BCCA_TDP_DATA_PURE_PREPAGO$cnttmc_n))
 
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cant1m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$mont1m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cant3m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$mont3m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cant6m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$mont6m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$ctotal_n))
-sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$mtotal_n))
+
+
 sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$costpl_n))
 sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cnttoc_n))
 sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cntnrc_n))
 sum(is.na(BCCA_TDP_DATA_RAW_POSTPAGO$cnttmc_n))
 
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$cant1m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$mont1m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$cant3m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$mont3m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$cant6m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$mont6m_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$ctotal_n))
-sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$mtotal_n))
 sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$costpl_n))
 sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$cnttoc_n))
 sum(is.na(BCCA_TDP_DATA_RAW_CONTROL$cntnrc_n))
@@ -249,6 +215,12 @@ sum(is.na(BCCA_TDP_DATA_PURE_CONTROL))
 BCCA_TDP_DATA_PURE_PREPAGO <- eliminaDuplicados(BCCA_TDP_DATA_PURE_PREPAGO)
 BCCA_TDP_DATA_PURE_POSTPAGO<- eliminaDuplicados(BCCA_TDP_DATA_PURE_POSTPAGO)
 BCCA_TDP_DATA_PURE_CONTROL <- eliminaDuplicados(BCCA_TDP_DATA_PURE_CONTROL)
+
+#Checkpoint
+BCCA_TDP_DATA_PURE_PREPAGO_SAVE <- BCCA_TDP_DATA_PURE_PREPAGO
+BCCA_TDP_DATA_PURE_POSTPAGO_SAVE <- BCCA_TDP_DATA_PURE_POSTPAGO
+BCCA_TDP_DATA_PURE_CONTROL_SAVE <- BCCA_TDP_DATA_PURE_CONTROL
+
 
 #Se mueve el target al final
 target_c_temp <- BCCA_TDP_DATA_PURE_PREPAGO$target_c
@@ -272,7 +244,138 @@ BCCA_TDP_DATA_PURE_CONTROL <- cbind(BCCA_TDP_DATA_PURE_CONTROL, target_c)
 rm(target_c, target_c_temp)
 names(BCCA_TDP_DATA_PURE_CONTROL)
 
+library(tibble)
+library(data.table)
 
+#Moviendo el producto al inicio
+
+produc_c_temp <- BCCA_TDP_DATA_PURE_PREPAGO$produc_c
+BCCA_TDP_DATA_PURE_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_PREPAGO, c("produc_c"))
+produc_c <- produc_c_temp
+BCCA_TDP_DATA_PURE_PREPAGO <- add_column(BCCA_TDP_DATA_PURE_PREPAGO, produc_c, .before = "edad_n")
+names(BCCA_TDP_DATA_PURE_PREPAGO)
+rm(produc_c)
+
+
+produc_c_temp <- BCCA_TDP_DATA_PURE_POSTPAGO$produc_c
+BCCA_TDP_DATA_PURE_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_POSTPAGO, c("produc_c"))
+produc_c <- produc_c_temp
+BCCA_TDP_DATA_PURE_POSTPAGO <- add_column(BCCA_TDP_DATA_PURE_POSTPAGO, produc_c, .before = "edad_n")
+names(BCCA_TDP_DATA_PURE_POSTPAGO)
+rm(produc_c)
+
+
+produc_c_temp <- BCCA_TDP_DATA_PURE_CONTROL$produc_c
+BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("produc_c"))
+produc_c <- produc_c_temp
+BCCA_TDP_DATA_PURE_CONTROL <- add_column(BCCA_TDP_DATA_PURE_CONTROL, produc_c, .before = "edad_n")
+names(BCCA_TDP_DATA_PURE_CONTROL)
+rm(produc_c)
+
+
+#Exportación de los tres datasets:
+write.csv(BCCA_TDP_DATA_PURE_PREPAGO,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/BCCA_TDP_DATA_PURE_PREPAGO.csv", row.names = FALSE)
+write.csv(BCCA_TDP_DATA_PURE_POSTPAGO,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/BCCA_TDP_DATA_PURE_POSTPAGO.csv", row.names = FALSE)
+write.csv(BCCA_TDP_DATA_PURE_CONTROL,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/BCCA_TDP_DATA_PURE_CONTROL.csv", row.names = FALSE)
+
+
+######################
+#APLICACIÓN DE LAS TÉCNICAS DE FILTRADO.(TecnicasFiltrado_datasetChurn_pp.R)
+
+#Eliminación de las características según peso para cada producto:
+caracteristicasInutilesTFPREPAGO <- c("rec1to_n","rec1fi_n","rec1pr_n","rec1np_n","rec1an_n","rec1pe_n","rec1to_1_n","rec1fi_1_n","rec1pr_1_n",
+                                      "rec1np_1_n","rec1an_1_n","rec1pe_1_n","rec1to_2_n","rec1fi_2_n","rec1pr_2_n","rec1np_2_n","rec1an_2_n",
+                                      "rec1pe_2_n","rec2to_n","rec2fi_n","rec2pr_n","rec2np_n","rec2an_n","rec2pe_n","rec2to_1_n","rec2fi_1_n",
+                                      "rec2pr_1_n","rec2np_1_n","rec2an_1_n","rec2pe_1_n","rec2to_2_n","rec2fi_2_n","rec2pr_2_n","rec2np_2_n",
+                                      "rec2an_2_n","rec2pe_2_n","rec3to_n","rec3fi_n","rec3pr_n","rec3np_n","rec3an_n","rec3pe_n","rec3to_1_n",
+                                      "rec3fi_1_n","rec3pr_1_n","rec3np_1_n","rec3an_1_n","rec3pe_1_n","rec3to_2_n","rec3fi_2_n","rec3pr_2_n",
+                                      "rec3np_2_n","rec3an_2_n","rec3pe_2_n","rec4to_n","rec4fi_n","rec4pr_n","rec4np_n","rec4an_n","rec4pe_n",
+                                      "rec4to_1_n","rec4fi_1_n","rec4pr_1_n","rec4np_1_n","rec4an_1_n","rec4pe_1_n","rec4np_2_n","rec4an_2_n",
+                                      "rec4pe_2_n","rep1to_n","rep1fi_n","rep1an_n","rep1pe_n","rep1an_1_n","rep1pe_1_n","rep1an_2_n","rep1pe_2_n",
+                                      "rep2to_n","rep2fi_n","rep2an_n","rep2pe_n","rep2an_1_n","rep2pe_1_n","rep2an_2_n","rep2pe_2_n","rep3to_n",
+                                      "rep3fi_n","rep3an_n","rep3pe_n","rep3to_1_n","rep3fi_1_n","rep3an_1_n","rep3pe_1_n","rep3an_2_n","rep3pe_2_n",
+                                      "rep4to_n","rep4fi_n","rep4an_n","rep4pe_n","rep4to_1_n","rep4fi_1_n","rep4an_1_n","rep4pe_1_n","rep4to_2_n",
+                                      "rep4fi_2_n","rep4an_2_n","rep4pe_2_n","fld043_n","fld044_n","fld047_n","fld048_n","fld051_n",
+                                      "fld052_n","fld075_n","fld076_n","rec2to_3_n","rep4to_3_n","tccopl_n")
+
+BCCA_TDP_DATA_PURE_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_PREPAGO, caracteristicasInutilesTFPREPAGO)
+rm(caracteristicasInutilesTFPREPAGO)
+
+
+caracteristicasInutilesTFPOSTPAGO <- c("rec1pr_n","rec1np_n","rec1an_n","rec1np_1_n","rec1an_1_n","rec1pe_1_n","rec1np_2_n","rec1an_2_n","rec1pe_2_n",
+                                       "rec2to_n","rec2fi_n","rec2pr_n","rec2np_n","rec2an_n","rec2pe_n","rec2to_1_n","rec2fi_1_n","rec2pr_1_n",
+                                       "rec2np_1_n","rec2an_1_n","rec2pe_1_n","rec2to_2_n","rec2fi_2_n","rec2pr_2_n","rec2np_2_n","rec2an_2_n","rec2pe_2_n",
+                                       "rec3to_n","rec3fi_n","rec3pr_n","rec3np_n","rec3an_n","rec3pe_n","rec3to_1_n","rec3fi_1_n","rec3pr_1_n",
+                                       "rec3np_1_n","rec3an_1_n","rec3pe_1_n","rec3to_2_n","rec3fi_2_n","rec3pr_2_n","rec3np_2_n","rec3an_2_n",
+                                       "rec3pe_2_n","rec4to_n","rec4fi_n","rec4pr_n","rec4np_n","rec4an_n","rec4pe_n","rec4to_1_n","rec4fi_1_n",
+                                       "rec4pr_1_n","rec4np_1_n","rec4an_1_n","rec4pe_1_n","rec4to_2_n","rec4fi_2_n","rec4pr_2_n","rec4np_2_n",
+                                       "rec4an_2_n","rec4pe_2_n","rep1an_n","rep1pe_n","rep1an_1_n","rep1pe_1_n","rep1an_2_n","rep1pe_2_n","rep2an_n",
+                                       "rep2pe_n","rep2to_1_n","rep2fi_1_n","rep2an_1_n","rep2pe_1_n","rep2to_2_n","rep2fi_2_n","rep2an_2_n",
+                                       "rep2pe_2_n","rep3to_n","rep3fi_n","rep3an_n","rep3pe_n","rep3to_1_n","rep3fi_1_n","rep3an_1_n",
+                                       "rep3pe_1_n","rep3an_2_n","rep3pe_2_n","rep4an_n","rep4pe_n","rep4to_1_n","rep4fi_1_n","rep4an_1_n",
+                                       "rep4pe_1_n","rep4an_2_n","rep4pe_2_n","fld043_n","fld044_n","fld047_n","fld048_n","fld051_n","fld052_n",
+                                       "fld075_n","fld076_n","rec2to_3_n","rec3to_3_n","rec4to_3_n")
+
+BCCA_TDP_DATA_PURE_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_POSTPAGO, caracteristicasInutilesTFPOSTPAGO)
+rm(caracteristicasInutilesTFPOSTPAGO)
+
+caracteristicasInutilesTFCONTROL <- c("rec1np_n","rec1an_n","rec1to_1_n","rec1fi_1_n","rec1pr_1_n","rec1np_1_n","rec1an_1_n","rec1pe_1_n","rec1np_2_n",
+                                      "rec1an_2_n","rec1pe_2_n","rec2to_n","rec2fi_n","rec2pr_n","rec2np_n","rec2an_n","rec2pe_n","rec2to_1_n","rec2fi_1_n",
+                                      "rec2pr_1_n","rec2np_1_n","rec2an_1_n","rec2pe_1_n","rec2to_2_n","rec2fi_2_n","rec2pr_2_n","rec2np_2_n","rec2an_2_n",
+                                      "rec2pe_2_n","rec3fi_n","rec3pr_n","rec3np_n","rec3an_n","rec3pe_n","rec3to_1_n","rec3fi_1_n","rec3pr_1_n","rec3np_1_n",
+                                      "rec3an_1_n","rec3pe_1_n","rec3to_2_n","rec3fi_2_n","rec3pr_2_n","rec3np_2_n","rec3an_2_n","rec3pe_2_n","rec4to_n",
+                                      "rec4fi_n","rec4pr_n","rec4np_n","rec4an_n","rec4pe_n","rec4to_1_n","rec4fi_1_n","rec4pr_1_n","rec4np_1_n","rec4an_1_n",
+                                      "rec4pe_1_n","rec4to_2_n","rec4fi_2_n","rec4pr_2_n","rec4np_2_n","rec4an_2_n","rec4pe_2_n","rep1an_n","rep1pe_n",
+                                      "rep1an_1_n","rep1pe_1_n","rep1an_2_n","rep1pe_2_n","rep2an_n","rep2pe_n","rep2an_1_n","rep2pe_1_n","rep2an_2_n",
+                                      "rep2pe_2_n","rep3to_n","rep3fi_n","rep3an_n","rep3pe_n","rep3to_1_n","rep3fi_1_n","rep3an_1_n","rep3pe_1_n",
+                                      "rep3an_2_n","rep3pe_2_n","rep4an_n","rep4pe_n","rep4to_1_n","rep4fi_1_n","rep4an_1_n","rep4pe_1_n","rep4an_2_n",
+                                      "rep4pe_2_n","fld043_n","fld044_n","fld047_n","fld048_n","fld051_n","fld052_n","fld075_n","fld076_n",
+                                      "rec3to_3_n","rec4to_3_n")
+
+BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, caracteristicasInutilesTFCONTROL)
+rm(caracteristicasInutilesTFCONTROL)
+
+######################
+BCCA_TDP_DATA_PREPAGO <- BCCA_TDP_DATA_PURE_PREPAGO
+BCCA_TDP_DATA_POSTPAGO <- BCCA_TDP_DATA_PURE_POSTPAGO
+BCCA_TDP_DATA_CONTROL <- BCCA_TDP_DATA_PURE_CONTROL
+
+
+write.csv(BCCA_TDP_DATA_PREPAGO,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/BCCA_TDP_DATA_PREPAGO.csv", row.names = FALSE)
+write.csv(BCCA_TDP_DATA_POSTPAGO,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/BCCA_TDP_DATA_POSTPAGO.csv", row.names = FALSE)
+write.csv(BCCA_TDP_DATA_CONTROL,"C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/BCCA_TDP_DATA_CONTROL.csv", row.names = FALSE)
+
+
+#Prueba con el árbol de decisión - PREPAGO
+library("rpart")
+library("rpart.plot")
+library("C50")
+
+
+#Creamos set de entrenamiento y de test
+#80% entrenamiento - 20% validación
+ind        <- sample(2,nrow(BCCA_TDP_DATA_PREPAGO), replace=TRUE, prob=c(0.8, 0.2))
+trainData  <- BCCA_TDP_DATA_PREPAGO[ind==1, ]
+testData   <- BCCA_TDP_DATA_PREPAGO[ind==2, ]
+
+ArbolRpart <- rpart(target_c ~ ., method = "class", data = trainData)
+
+print(ArbolRpart)
+rpart.plot(ArbolRpart)  # extra=4:probabilidad de observaciones por clase
+
+testPredRpart <- predict(ArbolRpart, newdata = testData, type = "class")
+
+#Visualizamos una matriz de confusión
+table(testPredRpart, testData$target_c)
+
+#Estadística del modelo.
+#Calculamos el % de aciertos.
+sum(testPredRpart == testData$target_c)/length(testData$target_c)*100
+
+
+
+
+############################################################################################################
 #Verificando el balanceo de datos:
 barplot(table(BCCA_TDP_DATA_PURE_PREPAGO$target_c))
 barplot(table(BCCA_TDP_DATA_PURE_POSTPAGO$target_c))
@@ -311,14 +414,3 @@ write.table(summary(BCCA_TDP_DATA_PREPAGO), "ResumenEstadisticoPREPAGO.csv", sep
 write.table(summary(BCCA_TDP_DATA_POSTPAGO), "ResumenEstadisticoPOSTPAGO.csv", sep=";", row.names=FALSE, col.names=TRUE, quote=FALSE)
 write.table(summary(BCCA_TDP_DATA_CONTROL), "ResumenEstadisticoCONTROL.csv", sep=";", row.names=FALSE, col.names=TRUE, quote=FALSE)
 
-#Técnicas de filtrado
-BCCA_TDP_DATA_PREPAGO_save <- BCCA_TDP_DATA_PREPAGO
-BCCA_TDP_DATA_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PREPAGO, "produc_c")
-library("FSelector")
-importanciaIG_prepago <- information.gain(target_c~.,BCCA_TDP_DATA_PREPAGO)
-
-
-#Exportación de la data
-write.csv(BCCA_TDP_DATA_PURE_PREPAGO,"D:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA DATASETS V1/BCCA_TDP_DATA_PURE_PREPAGO.csv", row.names = FALSE)
-write.csv(BCCA_TDP_DATA_PURE_POSTPAGO,"D:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA DATASETS V1/BCCA_TDP_DATA_PURE_POSTPAGO.csv", row.names = FALSE)
-write.csv(BCCA_TDP_DATA_PURE_CONTROL,"D:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA DATASETS V1/BCCA_TDP_DATA_PURE_CONTROL.csv", row.names = FALSE)
