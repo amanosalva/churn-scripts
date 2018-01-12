@@ -3,7 +3,7 @@ path_destino <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/
 
 #Batch
 
-lista_output <- transformacionDatasetChurn(path_origen, path_destino, "","","B")
+lista_output <- transformacionDatasetChurnWithTarget(path_origen, path_destino, "","","B")
 
 lista_output
 

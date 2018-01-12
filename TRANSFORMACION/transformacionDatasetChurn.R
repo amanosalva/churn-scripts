@@ -75,14 +75,14 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                #Función para recibir tramas asignándole los nombres específicos del dataset puro.
                recibeTramaPrepago <- function(trama,tokenp){
                  registro <- as.data.frame(do.call(rbind,strsplit(trama,tokenp)))
-                 names(registro) <-   c("produc_c"  , "edad_n"    , "antig_n"   , "eqanti_n"   ,"rec4to_2_n", "rec4fi_2_n","rec4pr_2_n", "cntsol_n"  , "rep1to_1_n"  ,
+                 names(registro) <-   c("tcntel_n"  ,"produc_c"  , "edad_n"    , "antig_n"   , "eqanti_n"   ,"rec4to_2_n", "rec4fi_2_n","rec4pr_2_n", "cntsol_n"  , "rep1to_1_n"  ,
                                         "rep1fi_1_n", "rep1to_2_n", "rep1fi_2_n", "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n","rep2fi_2_n", "rep3to_2_n", "rep3fi_2_n"    ,
                                         "fld041_n"  , "fld042_n"  , "fld045_n"  , "fld046_n"   ,"fld049_n"  , "fld050_n"  ,"fld053_n"  , "fld054_n"  , "fld057_n"      ,
                                         "fld058_n"  , "fld061_n"  , "fld062_n"  , "fld065_n"   ,"fld066_n"  , "fld069_n"  ,"fld070_n"  , "fld073_n"  , "fld074_n"      ,
                                         "pli_sn_c"  , "cant1m_n"  , "mont1m_n"  , "cant3m_n"   ,"mont3m_n"  , "cant6m_n"  ,"mont6m_n"  , "ctotal_n"  , "mtotal_n"      ,
                                         "rec1to_3_n", "rec3to_3_n", "rec4to_3_n", "rep1to_3_n" ,"rep2to_3_n", "rep3to_3_n")
                  #Asignación del tipo de dato. Convierte factor a numérico
-                 registro[,  c("edad_n"    , "antig_n"   , "eqanti_n"   ,"rec4to_2_n", "rec4fi_2_n","rec4pr_2_n", "cntsol_n"  , "rep1to_1_n"  ,
+                 registro[,  c("tcntel_n"  ,"edad_n"    , "antig_n"   , "eqanti_n"   ,"rec4to_2_n", "rec4fi_2_n","rec4pr_2_n", "cntsol_n"  , "rep1to_1_n"  ,
                                "rep1fi_1_n", "rep1to_2_n", "rep1fi_2_n", "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n","rep2fi_2_n", "rep3to_2_n", "rep3fi_2_n"    ,
                                "fld041_n"  , "fld042_n"  , "fld045_n"  , "fld046_n"   ,"fld049_n"  , "fld050_n"  ,"fld053_n"  , "fld054_n"  , "fld057_n"      ,
                                "fld058_n"  , "fld061_n"  , "fld062_n"  , "fld065_n"   ,"fld066_n"  , "fld069_n"  ,"fld070_n"  , "fld073_n"  , "fld074_n"      ,
@@ -104,9 +104,9 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                
                recibeTramaPostpago <- function(trama,tokenp){
                  registro <- as.data.frame(do.call(rbind,strsplit(trama,tokenp)))
-                 names(registro) <- c("produc_c"  , "edad_n"     ,"antig_n"   , "eqanti_n"   ,"linper_c"  , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
+                 names(registro) <- c("tcntel_n"  ,"produc_c"  , "edad_n"     ,"antig_n"   , "eqanti_n"   ,"linper_c"  , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
                                       "rec1fi_1_n", "rec1pr_1_n" ,"rec1to_2_n", "rec1fi_2_n" ,"rec1pr_2_n", "costpl_n"  , "conren_c"  , "cnttoc_n"  , "cntnrc_n"   ,
-                                      "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "tccopl_n"  , "rep1to_n"  , "rep1fi_n"   ,
+                                      "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "rep1to_n"  , "rep1fi_n"   ,
                                       "rep1to_1_n", "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n" ,"rep2to_n"  , "rep2fi_n"  , "rep3to_2_n", "rep3fi_2_n", "rep4to_n"   ,
                                       "rep4fi_n"  , "rep4to_2_n" ,"rep4fi_2_n", "fld041_n"   ,"fld042_n"  , "fld045_n"  , "fld046_n"  , "fld049_n"  , "fld050_n"   ,
                                       "fld053_n"  , "fld054_n"   ,"fld057_n"  , "fld058_n"   ,"fld061_n"  , "fld062_n"  , "fld065_n"  , "fld066_n"  , "fld069_n"   ,
@@ -115,9 +115,9 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                                       "fld146_n"  , "rec1to_3_n" ,"rep1to_3_n", "rep2to_3_n" ,"rep3to_3_n", "rep4to_3_n")
                  
                  #Asignación del tipo de dato. Convierte factor a numérico
-                 registro[,c("edad_n"  ,"antig_n"   , "eqanti_n" , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
+                 registro[,c("tcntel_n"  ,"edad_n"  ,"antig_n"   , "eqanti_n" , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
                              "rec1fi_1_n", "rec1pr_1_n" ,"rec1to_2_n", "rec1fi_2_n" ,"rec1pr_2_n", "costpl_n"  , "cnttoc_n"  , "cntnrc_n"   ,
-                             "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "tccopl_n"  , "rep1to_n"  , "rep1fi_n"   ,
+                             "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "rep1to_n"  , "rep1fi_n"   ,
                              "rep1to_1_n", "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n" ,"rep2to_n"  , "rep2fi_n"  , "rep3to_2_n", "rep3fi_2_n", "rep4to_n"   ,
                              "rep4fi_n"  , "rep4to_2_n" ,"rep4fi_2_n", "fld041_n"   ,"fld042_n"  , "fld045_n"  , "fld046_n"  , "fld049_n"  , "fld050_n"   ,
                              "fld053_n"  , "fld054_n"   ,"fld057_n"  , "fld058_n"   ,"fld061_n"  , "fld062_n"  , "fld065_n"  , "fld066_n"  , "fld069_n"   ,
@@ -125,7 +125,7 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                              "fld138_n"   ,"fld139_n"  , "fld140_n"   ,"fld141_n"  , "fld142_n"  , "fld143_n"  , "fld144_n"  , "fld145_n"   ,
                              "fld146_n"  , "rec1to_3_n" ,"rep1to_3_n", "rep2to_3_n" ,"rep3to_3_n", "rep4to_3_n" )] <- as.numeric(as.character(unlist(registro[,c("edad_n"  ,"antig_n"   , "eqanti_n" , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
                                                                                                                                                                  "rec1fi_1_n", "rec1pr_1_n" ,"rec1to_2_n", "rec1fi_2_n" ,"rec1pr_2_n", "costpl_n"  , "cnttoc_n"  , "cntnrc_n"   ,
-                                                                                                                                                                 "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "tccopl_n"  , "rep1to_n"  , "rep1fi_n"   ,
+                                                                                                                                                                 "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_n"  , "rep1to_n"  , "rep1fi_n"   ,
                                                                                                                                                                  "rep1to_1_n", "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n" ,"rep2to_n"  , "rep2fi_n"  , "rep3to_2_n", "rep3fi_2_n", "rep4to_n"   ,
                                                                                                                                                                  "rep4fi_n"  , "rep4to_2_n" ,"rep4fi_2_n", "fld041_n"   ,"fld042_n"  , "fld045_n"  , "fld046_n"  , "fld049_n"  , "fld050_n"   ,
                                                                                                                                                                  "fld053_n"  , "fld054_n"   ,"fld057_n"  , "fld058_n"   ,"fld061_n"  , "fld062_n"  , "fld065_n"  , "fld066_n"  , "fld069_n"   ,
@@ -145,9 +145,9 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                
                recibeTramaControl <- function(trama,tokenp){
                  registro <- as.data.frame(do.call(rbind,strsplit(trama,tokenp)))
-                 names(registro) <- c("produc_c"   ,"edad_n"    , "antig_n"   , "eqanti_n"  , "linper_c"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
+                 names(registro) <- c("tcntel_n"  ,"produc_c"   ,"edad_n"    , "antig_n"   , "eqanti_n"  , "linper_c"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
                                       "rec1to_2_n" ,"rec1fi_2_n", "rec1pr_2_n", "rec3to_n"  , "costpl_n"  , "conren_c"   ,"cnttoc_n"  , "cntnrc_n"  , "cnttmc_n"   ,
-                                      "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  , "tccopl_n"   ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
+                                      "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  , "rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
                                       "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n", "rep2to_n"  , "rep2fi_n"  , "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n", "rep2fi_2_n" ,
                                       "rep3to_2_n" ,"rep3fi_2_n", "rep4to_n"  , "rep4fi_n"  , "rep4to_2_n", "rep4fi_2_n" ,"fld041_n"  , "fld042_n"  , "fld045_n"   ,
                                       "fld046_n"   ,"fld049_n"  , "fld050_n"  , "fld053_n"  , "fld054_n"  , "fld057_n"   ,"fld058_n"  , "fld061_n"  , "fld062_n"   ,
@@ -157,9 +157,9 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                                       "rep4to_3_n")
                  
                  #Asignación del tipo de dato. Convierte factor a numérico
-                 registro[,c("edad_n"    , "antig_n"   , "eqanti_n"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
+                 registro[,c("tcntel_n"  ,"edad_n"    , "antig_n"   , "eqanti_n"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
                              "rec1to_2_n" ,"rec1fi_2_n", "rec1pr_2_n", "rec3to_n"  , "costpl_n"  ,"cnttoc_n"  , "cntnrc_n"  , "cnttmc_n"   ,
-                             "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  , "tccopl_n"   ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
+                             "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
                              "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n", "rep2to_n"  , "rep2fi_n"  , "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n", "rep2fi_2_n" ,
                              "rep3to_2_n" ,"rep3fi_2_n", "rep4to_n"  , "rep4fi_n"  , "rep4to_2_n", "rep4fi_2_n" ,"fld041_n"  , "fld042_n"  , "fld045_n"   ,
                              "fld046_n"   ,"fld049_n"  , "fld050_n"  , "fld053_n"  , "fld054_n"  , "fld057_n"   ,"fld058_n"  , "fld061_n"  , "fld062_n"   ,
@@ -168,7 +168,7 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                              "fld143_n"   ,"fld144_n"  , "fld145_n"  , "fld146_n"  , "rec1to_3_n", "rec2to_3_n" ,"rep1to_3_n", "rep2to_3_n", "rep3to_3_n" ,
                              "rep4to_3_n")] <- as.numeric(as.character(unlist(registro[,c("edad_n"    , "antig_n"   , "eqanti_n"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
                                                                                           "rec1to_2_n" ,"rec1fi_2_n", "rec1pr_2_n", "rec3to_n"  , "costpl_n"  ,"cnttoc_n"  , "cntnrc_n"  , "cnttmc_n"   ,
-                                                                                          "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  , "tccopl_n"   ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
+                                                                                          "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n", "cntctl_2_n", "cntsol_n"  ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
                                                                                           "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n", "rep2to_n"  , "rep2fi_n"  , "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n", "rep2fi_2_n" ,
                                                                                           "rep3to_2_n" ,"rep3fi_2_n", "rep4to_n"  , "rep4fi_n"  , "rep4to_2_n", "rep4fi_2_n" ,"fld041_n"  , "fld042_n"  , "fld045_n"   ,
                                                                                           "fld046_n"   ,"fld049_n"  , "fld050_n"  , "fld053_n"  , "fld054_n"  , "fld057_n"   ,"fld058_n"  , "fld061_n"  , "fld062_n"   ,
@@ -196,6 +196,8 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                
              })                                                 
       
+      #Eliminando el campo teléfono.
+      BCCA_TDP_DATA_PURE <- eliminaCaracteristica(BCCA_TDP_DATA_PURE, c("tcntel_n"))
       #Separando dataset PREPAGO
       if(VECTOR_PRODUCTOS[1] %in% productos){
         BCCA_TDP_DATA_PURE_PREPAGO<- subset(BCCA_TDP_DATA_PURE, BCCA_TDP_DATA_PURE$produc_c == VECTOR_PRODUCTOS[1])
@@ -206,7 +208,10 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
         flag_trama_control <- FALSE
         print("TRANSFORMANDO DATA PREPAGO")
         
-        
+        #edad_n
+        edad_n <- BCCA_TDP_DATA_PURE_PREPAGO$edad_n
+        BCCA_TDP_DATA_PURE_PREPAGO$edad_n <- ifelse(edad_n > 70, round(mean(edad_n)), edad_n)
+        rm(edad_n)
 
         #cntsol_n
         cntsol_n <- BCCA_TDP_DATA_PURE_PREPAGO$cntsol_n
@@ -451,6 +456,10 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
         flag_trama_control <- FALSE
         print("TRANSFORMANDO DATA POSTPAGO")
         
+        #edad_n
+        edad_n <- BCCA_TDP_DATA_PURE_POSTPAGO$edad_n
+        BCCA_TDP_DATA_PURE_POSTPAGO$edad_n <- ifelse(edad_n > 70, round(mean(edad_n)), edad_n)
+        rm(edad_n)
         
 
         #cntsol_n
@@ -592,14 +601,23 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                                                           ifelse(fld116_n > 20000000, "ilimitado", fld116_n)))
         rm(fld116_n)
         
+        #fld117_n
+        fld117_n <- BCCA_TDP_DATA_PURE_POSTPAGO$fld117_n
+        BCCA_TDP_DATA_PURE_POSTPAGO$fld117_n <- ifelse(fld117_n == 0, "[0]", 
+                                                       ifelse(fld117_n > 0 & fld117_n <= 50, "(0-50]",
+                                                              ifelse(fld117_n > 50 & fld117_n <= 200, "(50-200]",
+                                                                     ifelse(fld117_n > 200 & fld117_n <= 900, "(200-900]",
+                                                                        ifelse(fld117_n > 900, ">900", fld117_n)))))
+        rm(fld117_n)
+        
 
         names(BCCA_TDP_DATA_PURE_POSTPAGO) <- c("edad_n"    ,"antig_n"   , "eqanti_n"   ,"linper_c"  , "rec1to_n"  , "rec1fi_n"  , "rec1pe_n"  , "rec1to_1_n" ,
                                                 "rec1fi_1_n", "rec1pr_1_n" ,"rec1to_2_n", "rec1fi_2_n" ,"rec1pr_2_n", "costpl_n"  , "conren_c"  , "cnttoc_n"  , "cntnrc_n"   ,
-                                                "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_c"  , "tccopl_n"  , "rep1to_n"  , "rep1fi_n"   ,
+                                                "cnttmc_n"  , "cntctd_n"   ,"cntctl_n"  , "cntctl_1_n" ,"cntctl_2_n", "cntsol_c"  , "rep1to_n"  , "rep1fi_n"   ,
                                                 "rep1to_1_n", "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n" ,"rep2to_n"  , "rep2fi_n"  , "rep3to_2_n", "rep3fi_2_n", "rep4to_n"   ,
                                                 "rep4fi_n"  , "rep4to_2_n" ,"rep4fi_2_n", "fld041_c"   ,"fld042_c"  , "fld045_c"  , "fld046_c"  , "fld049_c"  , "fld050_c"   ,
                                                 "fld053_c"  , "fld054_c"   ,"fld057_c"  , "fld058_c"   ,"fld061_c"  , "fld062_c"  , "fld065_c"  , "fld066_c"  , "fld069_c"   ,
-                                                "fld070_c"  , "fld073_c"   ,"fld074_c"  , "fld115_c"   ,"fld116_c"  , "fld117_n"  , "fld119_c"  , "fld120_c"  , "fld121_c"   ,
+                                                "fld070_c"  , "fld073_c"   ,"fld074_c"  , "fld115_c"   ,"fld116_c"  , "fld117_c"  , "fld119_c"  , "fld120_c"  , "fld121_c"   ,
                                                 "fld122_c"  , "fld138_n"   ,"fld139_n"  , "fld140_n"   ,"fld141_n"  , "fld142_n"  , "fld143_n"  , "fld144_n"  , "fld145_n"   ,
                                                 "fld146_n"  , "rec1to_3_n" ,"rep1to_3_n", "rep2to_3_n" ,"rep3to_3_n", "rep4to_3_n")
         
@@ -615,7 +633,11 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
         flag_trama_control <- TRUE
         print("TRANSFORMANDO DATA CONTROL")
         
-
+        #edad_n
+        edad_n <- BCCA_TDP_DATA_PURE_CONTROL$edad_n
+        BCCA_TDP_DATA_PURE_CONTROL$edad_n <- ifelse(edad_n > 70, round(mean(edad_n)), edad_n)
+        rm(edad_n)
+        
         #cntctl_n
         cntctl_n <- BCCA_TDP_DATA_PURE_CONTROL$cntctl_n
         BCCA_TDP_DATA_PURE_CONTROL$cntctl_n <- ifelse(cntctl_n > 0, "si", "no")
@@ -787,13 +809,21 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
                                                          ifelse(fld116_n > 20000000, "ilimitado", fld116_n)))
         rm(fld116_n)
         
+        #fld117_n
+        fld117_n <- BCCA_TDP_DATA_PURE_CONTROL$fld117_n
+        BCCA_TDP_DATA_PURE_CONTROL$fld117_n <- ifelse(fld117_n == 0, "[0]", 
+                                                       ifelse(fld117_n > 0 & fld117_n <= 50, "(0-50]",
+                                                              ifelse(fld117_n > 50 & fld117_n <= 200, "(50-200]",
+                                                                     ifelse(fld117_n > 200 & fld117_n <= 900, "(200-900]",
+                                                                            ifelse(fld117_n > 900, ">900", fld117_n)))))
+        
         names(BCCA_TDP_DATA_PURE_CONTROL) <-  c("edad_n"     , "antig_n"   , "eqanti_n"  , "linper_c"  , "rec1to_n"   ,"rec1fi_n"  , "rec1pr_n"  , "rec1pe_n"   ,
                                                 "rec1to_2_n" ,"rec1fi_2_n", "rec1pr_2_n", "rec3to_n"  , "costpl_n"  , "conren_c"   ,"cnttoc_n"  , "cntnrc_n"  , "cnttmc_n"   ,
-                                                "cntctd_n"   ,"cntctl_c"  , "cntctl_1_c", "cntctl_2_c", "cntsol_c"  , "tccopl_n"   ,"rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
+                                                "cntctd_n"   ,"cntctl_c"  , "cntctl_1_c", "cntctl_2_c", "cntsol_c"  , "rep1to_n"  , "rep1fi_n"  , "rep1to_1_n" ,
                                                 "rep1fi_1_n" ,"rep1to_2_n", "rep1fi_2_n", "rep2to_n"  , "rep2fi_n"  , "rep2to_1_n" ,"rep2fi_1_n", "rep2to_2_n", "rep2fi_2_n" ,
                                                 "rep3to_2_n" ,"rep3fi_2_n", "rep4to_n"  , "rep4fi_n"  , "rep4to_2_n", "rep4fi_2_n" ,"fld041_c"  , "fld042_c"  , "fld045_c"   ,
                                                 "fld046_c"   ,"fld049_c"  , "fld050_c"  , "fld053_c"  , "fld054_c"  , "fld057_n"   ,"fld058_c"  , "fld061_c"  , "fld062_c"   ,
-                                                "fld065_c"   ,"fld066_c"  , "fld069_c"  , "fld070_c"  , "fld073_c"  , "fld074_c"   ,"fld115_c"  , "fld116_c"  , "fld117_n"   ,
+                                                "fld065_c"   ,"fld066_c"  , "fld069_c"  , "fld070_c"  , "fld073_c"  , "fld074_c"   ,"fld115_c"  , "fld116_c"  , "fld117_c"   ,
                                                 "fld119_c"   ,"fld120_c"  , "fld121_c"  , "fld122_c"  , "fld138_n"  , "fld139_n"   ,"fld140_n"  , "fld141_n"  , "fld142_n"   ,
                                                 "fld143_n"   ,"fld144_n"  , "fld145_n"  , "fld146_n"  , "rec1to_3_n", "rec2to_3_n" ,"rep1to_3_n", "rep2to_3_n", "rep3to_3_n" ,
                                                 "rep4to_3_n")
@@ -906,7 +936,7 @@ transformacionDatasetChurn <- function(path_origen, path_destino, trama, token, 
       return(message)
     }#, warning=function(cond) {
     #  message <- as.character(cond)
-    #  return(paste(message," xd"))
+    #  return(paste(message," -"))
     #}
     
     
