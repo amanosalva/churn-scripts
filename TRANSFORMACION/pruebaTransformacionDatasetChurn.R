@@ -1,8 +1,9 @@
 path_origen_prepago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_PREPAGO.csv"
 path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_POSTPAGO.csv"
+path_origen_postpago_analitico <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Entregable 2/Archivo de validación - sin transformar analitico/BCCA_TDP_DATA_POSTPAGO.csv"
 path_origen_control <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_CONTROL.csv"
 
-path_destino <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/destino"
+path_destino <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/pruebas/"
 
 #Batch
 
@@ -11,6 +12,9 @@ lista_output_prepago
 
 lista_output_postpago <- transformacionDatasetChurn(path_origen_postpago, path_destino, "","","B")
 lista_output_postpago
+
+lista_output_postpago_analitico <- transformacionDatasetChurn(path_origen_postpago_analitico, path_destino, "","","B")
+lista_output_postpago_analitico
 
 lista_outputcontrol <- transformacionDatasetChurn(path_origen_control, path_destino, "","","B")
 lista_outputcontrol

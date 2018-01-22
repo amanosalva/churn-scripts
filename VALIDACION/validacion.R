@@ -1,6 +1,7 @@
 #Validación de resultados:
-path_bcca <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Resultados/BCCA_TDP_DATA_POSTPAGO_RESULT.csv"
-path_wso2 <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Resultados/Predictions_WSO2.csv"
+path_bcca <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Last_validation/BCCA_TDP_DATA_POSTPAGO_RESULT.csv"
+path_wso2 <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Last_validation/Predictions_WSO2.csv"
+path_bcca_trans <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Last_validation/BCCA_TDP_DATA_TRANS_POSTPAGO.csv"
 
 library(readr)
 
@@ -27,11 +28,32 @@ Predictions_WSO2 <- read_csv(path_wso2,
                                                            "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
                                                            "mtotal_n"= col_double()))
 
+Predictions_WSO2 <- read_csv(path_wso2, 
+                             col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
+                                              "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
+                                              "fld139_n"= col_double(), "fld141_n"= col_double(), 
+                                              "fld143_n"= col_double(), "fld145_n"= col_double(), 
+                                              "fld146_n"= col_double(), "cant1m_n"= col_double(), 
+                                              "mont1m_n"= col_double(), "cant3m_n"= col_double(), 
+                                              "mont3m_n"= col_double(), "cant6m_n"= col_double(), 
+                                              "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
+                                              "mtotal_n"= col_double()))
+
+BCCA_TDP_DATA_TRANS_POSTPAGO <- read_csv(path_bcca_trans, 
+                                         col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
+                                                          "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
+                                                          "fld139_n"= col_double(), "fld141_n"= col_double(), 
+                                                          "fld143_n"= col_double(), "fld145_n"= col_double(), 
+                                                          "fld146_n"= col_double(), "cant1m_n"= col_double(), 
+                                                          "mont1m_n"= col_double(), "cant3m_n"= col_double(), 
+                                                          "mont3m_n"= col_double(), "cant6m_n"= col_double(), 
+                                                          "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
+                                                          "mtotal_n"= col_double()))
+
 
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$fld146_n     ==    Predictions_WSO2$fld146_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$cntnrc_n     ==    Predictions_WSO2$cntnrc_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$fld141_n     ==    Predictions_WSO2$fld141_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
-(sum(BCCA_TDP_DATA_POSTPAGO_RESULT$tccopl_n     ==    Predictions_WSO2$tccopl_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$antig_n      ==    Predictions_WSO2$antig_n    )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$eqanti_n     ==    Predictions_WSO2$eqanti_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$costpl_n     ==    Predictions_WSO2$costpl_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
@@ -49,7 +71,7 @@ Predictions_WSO2 <- read_csv(path_wso2,
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$fld139_n     ==    Predictions_WSO2$fld139_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$edad_n       ==    Predictions_WSO2$edad_n     )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$cntctl_n     ==    Predictions_WSO2$cntctl_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
-(sum(BCCA_TDP_DATA_POSTPAGO_RESULT$fld117_n     ==    Predictions_WSO2$fld117_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
+(sum(BCCA_TDP_DATA_POSTPAGO_RESULT$fld117_c     ==    Predictions_WSO2$fld117_c   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$cntctl_2_n   ==    Predictions_WSO2$cntctl_2_n )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$rep2to_n     ==    Predictions_WSO2$rep2to_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
 (sum(BCCA_TDP_DATA_POSTPAGO_RESULT$rep2fi_n     ==    Predictions_WSO2$rep2fi_n   )== nrow(BCCA_TDP_DATA_POSTPAGO_RESULT))
