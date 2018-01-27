@@ -124,7 +124,6 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$cntctl_1_n)    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$cntctl_1_n    <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$cntctl_2_n)    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$cntctl_2_n    <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$cntsol_n  )    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$cntsol_n      <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
-      lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$tccopl_n  )    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$tccopl_n      <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$rep1to_n  )    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$rep1to_n      <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$rep1fi_n  )    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$rep1fi_n      <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
       lista_resultante <- validaNAOrNoNumericoOrNegativo(BCCA_TDP_DATA_PURE$rep1to_1_n)    ; if(lista_resultante[[1]]){ BCCA_TDP_DATA_PURE$rep1to_1_n    <- lista_resultante[[2]] ; flag_con_errores <- TRUE ; lista_resultante <- list(NULL,NULL)}
@@ -208,7 +207,6 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$cntctl_1_n) |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$cntctl_2_n) |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$cntsol_n)   |
-                                    grepl("ERROR", BCCA_TDP_DATA_PURE$tccopl_n)   |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$rep1to_n)   |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$rep1fi_n)   |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$rep1to_1_n) |
