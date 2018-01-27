@@ -316,7 +316,6 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                if(VECTOR_PRODUCTOS[2] %in% productos){
                  print("VALIDANDO POSTPAGO")
                  lista_output  <- validaCamposPostpago(BCCA_TDP_DATA_PURE, SEPARADOR_ERROR, lista_output)
-                 print(lista_output)
                  if(!is.null(unlist(lista_output))){
                    stop("Postpago - Algunos campos no son válidos, no se generará la predicción")
                  }
@@ -1186,7 +1185,6 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                
                
                #Llenando output
-               print(lista_output)
                lista_output[[1]] <- "OK"
                lista_output[[3]] <- vector_resultante
 
