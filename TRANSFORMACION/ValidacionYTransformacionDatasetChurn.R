@@ -40,7 +40,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
       #sUB FUNCIONES DE VALIDACIÓN
       validaNAOrNoNumerico <- function(vector){
         lista_resultante <- list(NULL,NULL)
-        nuevoVector <- ifelse(is.na(vector) | !is.numeric(vector) , paste('ERROR',vector,sep=SEPARADOR_ERROR), vector)
+        nuevoVector <- ifelse(is.na(vector) | grepl("[^-0-9|0-9.|0-9e+0-9]", vector)   , paste('ERROR',vector,sep=SEPARADOR_ERROR), vector)
         lista_resultante <- HuboError(vector,nuevoVector)
         
         return(lista_resultante)                      
@@ -48,7 +48,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
       
       validaNAOrNoNumericoOrNegativo <- function(vector){
         lista_resultante <- list(NULL,NULL)
-        nuevoVector <- ifelse(is.na(vector) | !is.numeric(vector) | vector < 0, paste('ERROR',vector,sep=SEPARADOR_ERROR), vector)
+        nuevoVector <- ifelse(is.na(vector) | grepl("[^0-9|0-9.|0-9e+0-9]", vector)  | vector < 0, paste('ERROR',vector,sep=SEPARADOR_ERROR), vector)
         lista_resultante <- HuboError(vector,nuevoVector)
         
         return(lista_resultante) 
@@ -261,7 +261,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$rep3to_3_n) |
                                     grepl("ERROR", BCCA_TDP_DATA_PURE$rep4to_3_n) )
         
-        path_destino_errores <- paste(path_destino,'validation/',NOMBRE_DATASET_ERRORS, format(Sys.time(), "%d_%m_%y_%H_%M_%S_%p"),EXTENSION_ARCHIVO_DESTINO, sep = '')
+        path_destino_errores <- paste(path_destino,'validation/',NOMBRE_DATASET_ERRORS, format(Sys.time(), "%d_%m_%y_%H_%M_%S"),EXTENSION_ARCHIVO_DESTINO, sep = '')
         
         lista_output <- list('INCORRECT_VALUES_IN_THE_FEATURES',NULL,NULL,NULL)
         write.csv(dataset_errores, path_destino_errores, row.names = FALSE)
@@ -289,7 +289,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                library(readr)
                print(paste("IMPORTANDO DATASET DESDE ", path_origen), sep="")
                BCCA_TDP_DATA_PURE <- read_csv(path_origen, 
-                                          col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
+                                          col_types = list("cnttoc_n"= col_double(), 
                                                            "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
                                                            "fld139_n"= col_double(), "fld141_n"= col_double(), 
                                                            "fld143_n"= col_double(), "fld145_n"= col_double(), 
