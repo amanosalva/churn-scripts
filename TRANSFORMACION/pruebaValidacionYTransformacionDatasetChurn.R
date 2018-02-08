@@ -1,5 +1,9 @@
 path_origen_prepago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_PREPAGO.csv"
-path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_TDP_DATA_POSTPAGO.csv"
+#path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_AVT_DATA_POSTPAGO_BAN87R02.csv"
+#path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_TDP_DATA_POSTPAGO_CHIPRE.csv"
+#path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_AVT_DATA_POSTPAGO_BAN87R07.csv"
+#path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_AVT_DATA_POSTPAGO_BAN87R07.csv"
+path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_DATA_POSTPAGO_ANTHONY_PRUEBA.csv"
 path_origen_postpago_analitico <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Entregable 2/Archivo de validación - sin transformar analitico/BCCA_TDP_DATA_POSTPAGO.csv"
 path_origen_control <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_CONTROL.csv"
 
