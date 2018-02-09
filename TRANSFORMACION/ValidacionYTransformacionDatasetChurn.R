@@ -938,12 +938,18 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                  }
                  if(flag_trama_postpago){
                    
-                   #BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n <- agregaJsonUltimoCampo(BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion)
+                   BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n <- agregaJsonUltimoCampo(BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion)
                    #BCCA_TDP_DATA_PURE_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_POSTPAGO, c("target_c"))
                    path_destino_postpago <- paste(path_destino,NOMBRE_DATASET,toupper(VECTOR_PRODUCTOS[2]),EXTENSION_ARCHIVO_DESTINO, sep = "") 
                    vector_resultante[1] <- VECTOR_PRODUCTOS[2]
                    vector_resultante[2] <- path_destino_postpago
-                   write.csv(BCCA_TDP_DATA_PURE_POSTPAGO, path_destino_postpago, row.names = FALSE,quote = FALSE)
+                   
+                   ####
+                   #commas <- which(sapply(BCCA_TDP_DATA_PURE_POSTPAGO, function(y) any(grepl("$",y))))
+                   #write.csv(BCCA_TDP_DATA_PURE_POSTPAGO,path_destino_postpago,row.names=FALSE,quote=commas)
+                   ####
+                   
+                   write.csv(BCCA_TDP_DATA_PURE_POSTPAGO, path_destino_postpago, quote = c(4,15,23,38,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62), row.names = FALSE)
                  }
                  if(flag_trama_control){
                    #BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("target_c"))
