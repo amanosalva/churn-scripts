@@ -250,6 +250,11 @@ validaCamposPostpago <- function(BCCA_TDP_DATA_PURE, SEPARADOR_ERROR, lista_outp
                                 grepl("ERROR", BCCA_TDP_DATA_PURE$rep3to_3_n) |
                                 grepl("ERROR", BCCA_TDP_DATA_PURE$rep4to_3_n) )
     
+    
+    if(nrow(dataset_errores) > 180000){
+      dataset_errores <- head(dataset_errores,180000)
+    }
+    
     #path_destino_errores <- paste(path_destino,'validation/',NOMBRE_DATASET_ERRORS, format(Sys.time(), "%d_%m_%y_%H_%M_%S"),EXTENSION_ARCHIVO_DESTINO, sep = '')
     path_destino_errores <- paste(path_destino,'validation/',NOMBRE_DATASET_ERRORS,EXTENSION_ARCHIVO_DESTINO, sep = '')
     lista_output <- list('INCORRECT_VALUES_IN_THE_FEATURES',NULL,NULL,NULL)

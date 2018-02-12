@@ -64,6 +64,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                  print("VALIDANDO PREPAGO")
                  lista_output <- validaCamposPrepago(BCCA_TDP_DATA_PURE, SEPARADOR_ERROR, lista_output)
                  if(!is.null(unlist(lista_output))){
+                   print("Prepago - Algunos campos no son válidos, no se generará la predicción")
                    stop("Prepago - Algunos campos no son válidos, no se generará la predicción")
                  }
                }
@@ -92,6 +93,7 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                  print('Validando')
                  BCCA_TDP_DATA_PURE[1,] <- 'ERROR|'
                  write.csv(BCCA_TDP_DATA_PURE, path_destino_errores, row.names = FALSE, na = "")
+                 print("Postpago - Algunos campos no son válidos, no se generará la predicción")
                  stop("Postpago - Algunos campos no son válidos, no se generará la predicción")
                }
                
@@ -100,7 +102,8 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                  print("VALIDANDO CONTROL")
                  lista_output  <- validaCamposControl(BCCA_TDP_DATA_PURE, SEPARADOR_ERROR, lista_output)
                  if(!is.null(unlist(lista_output))){
-                   stop("Control - Algunos campos no son válidos, no se generará la predicción")
+                  print("Control - Algunos campos no son válidos, no se generará la predicción")
+                  stop("Control - Algunos campos no son válidos, no se generará la predicción")
                  }
                
                }
@@ -260,14 +263,20 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
                
              })                                                 
       
-      #Eliminando el campo teléfono.
-      #BCCA_TDP_DATA_PURE <- eliminaCaracteristica(BCCA_TDP_DATA_PURE, c("tcntel_n"))
-      #Eliminando el campo tcdepl_c
-      #BCCA_TDP_DATA_PURE <- eliminaCaracteristica(BCCA_TDP_DATA_PURE, c("tcdepl_c"))
-      #Separando dataset PREPAGO
+
+      #Transformando PREPAGO
       if(VECTOR_PRODUCTOS[1] %in% productos){
         BCCA_TDP_DATA_PURE_PREPAGO<- subset(BCCA_TDP_DATA_PURE, BCCA_TDP_DATA_PURE$produc_c == VECTOR_PRODUCTOS[1])
         BCCA_TDP_DATA_PURE_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_PREPAGO, c("produc_c"))
+        telefono <- BCCA_TDP_DATA_PURE_PREPAGO$tcntel_n
+        tiempoAdquisicion <- BCCA_TDP_DATA_PURE_PREPAGO$antig_n
+        
+        #Eliminando el campo teléfono.
+        BCCA_TDP_DATA_PURE_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_PREPAGO, c("tcntel_n"))
+
+        
+        
+        
         producto_trama <- VECTOR_PRODUCTOS[1]
         flag_trama_prepago <- TRUE
         flag_trama_postpago <- FALSE
@@ -704,6 +713,18 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
         producto_trama <- VECTOR_PRODUCTOS[3]
         BCCA_TDP_DATA_PURE_CONTROL<- subset(BCCA_TDP_DATA_PURE, BCCA_TDP_DATA_PURE$produc_c == "control")
         BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("produc_c"))
+        
+        
+        telefono <- BCCA_TDP_DATA_PURE_CONTROL$tcntel_n
+        descripcionPlan <- BCCA_TDP_DATA_PURE_CONTROL$tcdepl_c
+        cargoFijo <- BCCA_TDP_DATA_PURE_CONTROL$costpl_n
+        tiempoAdquisicion <- BCCA_TDP_DATA_PURE_CONTROL$antig_n
+        
+        #Eliminando el campo teléfono.
+        BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("tcntel_n"))
+        #Eliminando el campo tcdepl_c
+        BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("tcdepl_c"))
+        
         flag_trama_prepago <- FALSE
         flag_trama_postpago <- FALSE
         flag_trama_control <- TRUE
@@ -918,10 +939,25 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
       switch(opcion, 
              B = {
                
-               agregaJsonUltimoCampo <- function(UltimaColumnaDatasetTransformado, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion){
+               agregaJsonUltimoCampoPostpago <- function(UltimaColumnaDatasetTransformado, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion){
                  UltimaColumnaDatasetTransformado <- paste(UltimaColumnaDatasetTransformado,'${#}{','"telefono":"', telefono,'","descripcion-plan":"',descripcionPlan,'","cargo-fijo":"',cargoFijo,'","tiempo-adquisicion":"',tiempoAdquisicion,'"}',sep = "")
                  return(UltimaColumnaDatasetTransformado)
                }
+               
+               
+               agregaJsonUltimoCampoPrepago <- function(UltimaColumnaDatasetTransformado, telefono, tiempoAdquisicion){
+                 print('estoy aqui')
+                 UltimaColumnaDatasetTransformado <- paste(UltimaColumnaDatasetTransformado,'${#}{','"telefono":"', telefono,'","tiempo-adquisicion":"',tiempoAdquisicion,'"}',sep = "")
+                 print('estoy aqui2')
+                 return(UltimaColumnaDatasetTransformado)
+               }
+               
+               
+               agregaJsonUltimoCampoControl <- function(UltimaColumnaDatasetTransformado, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion){
+                 UltimaColumnaDatasetTransformado <- paste(UltimaColumnaDatasetTransformado,'${#}{','"telefono":"', telefono,'","descripcion-plan":"',descripcionPlan,'","cargo-fijo":"',cargoFijo,'","tiempo-adquisicion":"',tiempoAdquisicion,'"}',sep = "")
+                 return(UltimaColumnaDatasetTransformado)
+               }
+               
                
                #Caso 1: Se ingresó el path destino: opcion = "batch"
                #Genera excel:
@@ -930,33 +966,30 @@ ValidacionYTransformacionDatasetChurn <- function(path_origen, path_destino, tra
 
                if(substr(path_destino,nchar(path_destino),nchar(path_destino)) == "/"){
                  if(flag_trama_prepago){
-                   #BCCA_TDP_DATA_PURE_PREPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_PREPAGO, c("target_c"))
+                   
+                   BCCA_TDP_DATA_PURE_PREPAGO$rep3to_3_n <- agregaJsonUltimoCampoPrepago(BCCA_TDP_DATA_PURE_PREPAGO$rep3to_3_n, telefono, tiempoAdquisicion)
                    path_destino_prepago <- paste(path_destino,NOMBRE_DATASET,toupper(VECTOR_PRODUCTOS[1]),EXTENSION_ARCHIVO_DESTINO, sep = "") 
                    vector_resultante[1] <- VECTOR_PRODUCTOS[1]
                    vector_resultante[2] <- path_destino_prepago
-                   write.csv(BCCA_TDP_DATA_PURE_PREPAGO, path_destino_prepago, row.names = FALSE)
+                   write.csv(BCCA_TDP_DATA_PURE_PREPAGO, path_destino_prepago, quote = c(7,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44), row.names = FALSE)
                  }
                  if(flag_trama_postpago){
                    
-                   BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n <- agregaJsonUltimoCampo(BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion)
-                   #BCCA_TDP_DATA_PURE_POSTPAGO <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_POSTPAGO, c("target_c"))
+                   BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n <- agregaJsonUltimoCampoPostpago(BCCA_TDP_DATA_PURE_POSTPAGO$rep4to_3_n, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion)
                    path_destino_postpago <- paste(path_destino,NOMBRE_DATASET,toupper(VECTOR_PRODUCTOS[2]),EXTENSION_ARCHIVO_DESTINO, sep = "") 
                    vector_resultante[1] <- VECTOR_PRODUCTOS[2]
                    vector_resultante[2] <- path_destino_postpago
-                   
-                   ####
-                   #commas <- which(sapply(BCCA_TDP_DATA_PURE_POSTPAGO, function(y) any(grepl("$",y))))
-                   #write.csv(BCCA_TDP_DATA_PURE_POSTPAGO,path_destino_postpago,row.names=FALSE,quote=commas)
-                   ####
+
                    
                    write.csv(BCCA_TDP_DATA_PURE_POSTPAGO, path_destino_postpago, quote = c(4,15,23,38,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62), row.names = FALSE)
                  }
                  if(flag_trama_control){
-                   #BCCA_TDP_DATA_PURE_CONTROL <- eliminaCaracteristica(BCCA_TDP_DATA_PURE_CONTROL, c("target_c"))
+                   
+                   BCCA_TDP_DATA_PURE_CONTROL$rep4to_3_n <- agregaJsonUltimoCampoControl(BCCA_TDP_DATA_PURE_CONTROL$rep4to_3_n, telefono, descripcionPlan, cargoFijo, tiempoAdquisicion)
                    path_destino_control <- paste(path_destino,NOMBRE_DATASET,toupper(VECTOR_PRODUCTOS[3]),EXTENSION_ARCHIVO_DESTINO, sep = "") 
                    vector_resultante[1] <- VECTOR_PRODUCTOS[3]
                    vector_resultante[2] <- path_destino_control
-                   write.csv(BCCA_TDP_DATA_PURE_CONTROL, path_destino_control, row.names = FALSE)
+                   write.csv(BCCA_TDP_DATA_PURE_CONTROL, path_destino_control, quote = c(4,14,19,20,21,22,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65), row.names = FALSE)
                  }
                }else{
                  if(flag_trama_prepago){

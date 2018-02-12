@@ -3,11 +3,29 @@ path_origen_prepago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/D
 #path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_TDP_DATA_POSTPAGO_CHIPRE.csv"
 #path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_AVT_DATA_POSTPAGO_BAN87R07.csv"
 #path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_AVT_DATA_POSTPAGO_BAN87R07.csv"
-path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_DATA_POSTPAGO_ANTHONY_PRUEBA.csv"
+#path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_DATA_POSTPAGO_ANTHONY_PRUEBA.csv"
+path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/PRUEBA_VALIDATION/BCCA_TDP_DATA_POSTPAGO_ZIMBABUE_PLAN_OK.csv"
+
+
+path_origen_prepago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/BCCA_TDP_DATA_PREPAGO_TEST.csv"
+path_origen_postpago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/BCCA_TDP_DATA_POSTPAGO_TEST.csv"
+path_origen_control <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/BCCA_TDP_DATA_CONTROL_TEST.csv"
+
+
+#Fails
+path_origen_prepago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/Test con error/BCCA_TDP_DATA_PREPAGO_TEST_FAIL.csv"
+path_origen_postpago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/Test con error/BCCA_TDP_DATA_POSTPAGO_TEST_FAIL.csv"
+path_origen_control <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/3. Tests/Test con error/BCCA_TDP_DATA_CONTROL_TEST_FAIL.csv"
+
+
+
+
 path_origen_postpago_analitico <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Sprint 2/Entregable 2/Archivo de validación - sin transformar analitico/BCCA_TDP_DATA_POSTPAGO.csv"
 path_origen_control <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/sintarget/BCCA_TDP_DATA_CONTROL.csv"
 
-path_destino <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/pruebas/"
+path_destino <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/4. Transformados/"
+
+
 
 #Batch
 
@@ -20,8 +38,8 @@ lista_output_postpago
 lista_output_postpago_analitico <- ValidacionYTransformacionDatasetChurn(path_origen_postpago_analitico, path_destino, "","","B")
 lista_output_postpago_analitico
 
-lista_outputcontrol <- ValidacionYTransformacionDatasetChurn(path_origen_control, path_destino, "","","B")
-lista_outputcontrol
+lista_output_control <- ValidacionYTransformacionDatasetChurn(path_origen_control, path_destino, "","","B")
+lista_output_control
 
 
 

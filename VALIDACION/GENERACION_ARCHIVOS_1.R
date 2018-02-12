@@ -1,8 +1,24 @@
 #Separación del dataset POSTPAGO analizado filtrado SIN TRANSFORMAR.
 
-path_origen <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/BCCA_TDP_DATA_POSTPAGO.csv"
+path_origen_postpago <- "C:/Byte/Machine Learning/Predictivo Port Out - Oficial/Dataset/BCCA_DATA_PURE/FILTRADA LISTA PARA TRANSFORMAR/BCCA_TDP_DATA_POSTPAGO.csv"
+path_origen_prepago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/2. Filtradas/BCCA_TDP_DATA_PREPAGO.csv"
+path_origen_prepago <- "C:/Byte/Machine Learning/BCCA - Oficial/1. Datasets/2. Filtradas/BCCA_TDP_DATA_CONTROL.csv"
 
-BCCA_TDP_DATA_PURE <- read_csv(path_origen, 
+
+
+BCCA_TDP_DATA_PURE <- read_csv(path_origen_prepago, 
+                               col_types = list("cnttoc_n"= col_double(), 
+                                                "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
+                                                "fld139_n"= col_double(), "fld141_n"= col_double(), 
+                                                "fld143_n"= col_double(), "fld145_n"= col_double(), 
+                                                "fld146_n"= col_double(), "cant1m_n"= col_double(), 
+                                                "mont1m_n"= col_double(), "cant3m_n"= col_double(), 
+                                                "mont3m_n"= col_double(), "cant6m_n"= col_double(), 
+                                                "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
+                                                "mtotal_n"= col_double()))
+
+
+BCCA_TDP_DATA_PURE <- read_csv(path_origen_postpago, 
                                col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
                                                 "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
                                                 "fld139_n"= col_double(), "fld141_n"= col_double(), 
@@ -12,6 +28,20 @@ BCCA_TDP_DATA_PURE <- read_csv(path_origen,
                                                 "mont3m_n"= col_double(), "cant6m_n"= col_double(), 
                                                 "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
                                                 "mtotal_n"= col_double()))
+
+
+BCCA_TDP_DATA_PURE <- read_csv(path_origen_postpago, 
+                               col_types = list("costpl_n" = col_double(), "cnttoc_n"= col_double(), 
+                                                "cntnrc_n"= col_double(), "cnttmc_n"= col_double(), 
+                                                "fld139_n"= col_double(), "fld141_n"= col_double(), 
+                                                "fld143_n"= col_double(), "fld145_n"= col_double(), 
+                                                "fld146_n"= col_double(), "cant1m_n"= col_double(), 
+                                                "mont1m_n"= col_double(), "cant3m_n"= col_double(), 
+                                                "mont3m_n"= col_double(), "cant6m_n"= col_double(), 
+                                                "mont6m_n"= col_double(), "ctotal_n"= col_double(), 
+                                                "mtotal_n"= col_double()))
+
+
 
 #Borrando la variable tccopl_n, ya que son códigos
 BCCA_TDP_DATA_PURE <- eliminaCaracteristica(BCCA_TDP_DATA_PURE, c("tccopl_n"))
